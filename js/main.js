@@ -1,7 +1,9 @@
 // js goes here
 var radioApp = angular.module('radioApp', []);
+var myAPIkey = 'MDIxNjc3OTcwMDE0NTAxNjcwNzIyNGZiYw000';
+var nprURL = 'http://api.npr.org/query?id=61&fields=relatedLink,title,byline,text,audio,image,pullQuote,all&output=JSON';
 
-radioApp.controller('playerCtrl', ['$scope', function($scope) {
+radioApp.controller('playerCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.playing = false;
 	$scope.audio = document.createElement('audio');
 	$scope.audio.src = 'http://pd.npr.org/npr-mp4/npr/sf/2013/07/20130726_sf_05.mp4?orgId=1&topicId=1032&ft=3&f=61';
@@ -20,6 +22,19 @@ radioApp.controller('playerCtrl', ['$scope', function($scope) {
 			$scope.stop();
 		});
 	});
+
+	$http({
+		method: 'JSONP',
+		url: nprURL + '&apiKey=' + myAPIkey + '&callback=JSON_CALLBACK'
+	}).success(function(data, status) {
+		$scope.programs = data.list.story;
+	}).error(function(data, status) {
+
+	});
+
+
+
+
 
 }]);
 
