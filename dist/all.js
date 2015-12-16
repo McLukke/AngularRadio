@@ -11,11 +11,11 @@ radioApp.controller('playerCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.play = function() {
 		$scope.audio.play();
 		$scope.playing = true;
-	}
+	};
 	$scope.stop = function () {
 		$scope.audio.pause();
 		$scope.playing = false;
-	}
+	};
 
 	$scope.audio.addEventListener('ended', function() {
 		$scope.$apply(function() {
@@ -58,7 +58,7 @@ radioApp.directive('nprLink', function() {
     link: function(scope, ele, attr) {
       scope.duration = scope.ngModel.audio[0].duration.$text;
     }
-  }
+  };
 });
 
 radioApp.controller('relatedCtrl', function($scope) {
